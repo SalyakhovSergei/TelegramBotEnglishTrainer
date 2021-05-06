@@ -17,7 +17,7 @@ namespace TelegramBotTask
 
         public BotMessageLogic(ITelegramBotClient botClient)
         {
-            messenger = new Messenger();
+            messenger = new Messenger(botClient);
             chatlist = new Dictionary<long, Conversation>();
             this.telegramBott = botClient;
         }
