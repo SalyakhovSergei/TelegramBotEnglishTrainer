@@ -34,16 +34,21 @@ namespace TelegramBotTask
             var chat = chatlist[id];
             chat.AddMessage(e.Message);
 
-            await SendTextMessage(chat);
+            await SendMessage(chat);
         }
 
-        private async Task SendTextMessage (Conversation chat)
+        //private async Task SendTextMessage (Conversation chat)
+        //{
+        //    var text = messenger.CreateTextMessage(chat);
+        //    await telegramBott.SendTextMessageAsync(chatId: chat.GetId(), text: text);
+        //}
+        private async Task SendMessage(Conversation chat)
         {
-            var text = messenger.CreateTextMessage(chat);
-            await telegramBott.SendTextMessageAsync(chatId: chat.GetId(), text: text);
+            await messenger.MakeAnswer(chat);
+
         }
 
-        
+
 
     }
 }
