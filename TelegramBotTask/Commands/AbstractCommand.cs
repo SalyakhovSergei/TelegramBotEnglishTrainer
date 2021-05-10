@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TelegramBotTask.Commands
 {
-    public abstract class AbstractCommand : IChatcommand
+    public abstract class AbstractCommand : IChatCommand
     {
         public string CommandText;
 

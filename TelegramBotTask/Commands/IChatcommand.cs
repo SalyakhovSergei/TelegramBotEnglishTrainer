@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TelegramBotTask.Commands
 {
-   public interface IChatcommand
+   public interface IChatCommand
     {
         bool CheckMessage(string message);
     }

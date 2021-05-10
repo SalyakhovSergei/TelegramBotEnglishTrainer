@@ -16,7 +16,7 @@ namespace TelegramBotTask.Commands
         public PoemButtonCommand(ITelegramBotClient botClient)
         {
             this.botClient = botClient;
-            CommandText = "/poembuttons";
+            CommandText = "/verbs";
         }
 
         public void AddCallBack(Conversation chat)
@@ -30,16 +30,17 @@ namespace TelegramBotTask.Commands
             var text = "";
             switch (e.CallbackQuery.Data)
             {
-                case "pushkin":
-                    text = @"Я помню чудное мгновенье:
-                                    Передо мной явилась ты,
-                                    Как мимолетное виденье,
-                                    Как гений чистой красоты.";
+                case "do":
+                    text = @"do / did / done";
                     break;
-                case "esenin":
-                    text = @"Не каждый умеет петь,
-                                Не каждому дано яблоком
-                                Падать к чужим ногам.";
+                case "be":
+                    text = @"be / was|were / been";
+                    break;
+                case "go":
+                    text = @"go / went / gone";
+                    break;
+                case "begin":
+                    text = @"begin / began / begun";
                     break;
                 default:
                     break;
@@ -56,14 +57,26 @@ namespace TelegramBotTask.Commands
             {
                 new InlineKeyboardButton
                 {
-                    Text = "Пушкин",
-                    CallbackData = "pushkin"
+                    Text = "do",
+                    CallbackData = "do"
                 },
 
                 new InlineKeyboardButton
                 {
-                    Text = "Есенин",
-                    CallbackData = "esenin"
+                    Text = "be",
+                    CallbackData = "be"
+                },
+
+                new InlineKeyboardButton
+                {
+                    Text = "go",
+                    CallbackData = "go"
+                },
+
+                new InlineKeyboardButton
+                {
+                    Text = "begin",
+                    CallbackData = "begin"
                 }
 
             };
@@ -73,7 +86,7 @@ namespace TelegramBotTask.Commands
 
         public string InformationalMessage()
         {
-           return "Выберите поэта";
+           return "Выберите глагол";
         }
     }
 }

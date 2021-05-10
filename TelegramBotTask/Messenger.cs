@@ -18,6 +18,8 @@ namespace TelegramBotTask
         {
             this.botClient = botClient;
             parser = new CommandParser();
+
+            RegisterCommands();
         }
 
         private void RegisterCommands()
@@ -46,7 +48,7 @@ namespace TelegramBotTask
                 return;
             }
 
-            if (parser.IsMessageCommad(lastMessage))
+            if (parser.IsMessageCommand(lastMessage))
             {
                 await ExecCommand(chat, lastMessage);
             }
@@ -68,9 +70,9 @@ namespace TelegramBotTask
             }
             if (parser.IsButtonCommand(command))
             {
-                var keys = parser.GetKeyboard(command);
+                var keys = parser.GetKeyBoard(command);
                 var text = parser.GetInformationalMessage(command);
-                parser.AddCallBack(command, chat);
+                parser.AddCallback(command, chat);
 
                 await SendTextWithKeyBoard(chat, text, keys);
             }
