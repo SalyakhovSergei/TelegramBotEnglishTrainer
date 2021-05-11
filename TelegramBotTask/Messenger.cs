@@ -30,6 +30,7 @@ namespace TelegramBotTask
             parser.AddCommand(new DeleteWordCommand());
             parser.AddCommand(new TrainingCommand(botClient));
             parser.AddCommand(new StopTrainingCommand());
+            parser.AddCommand(new AddVerbs(botClient));
         }
 
         public async Task MakeAnswer(Conversation chat)
@@ -47,6 +48,13 @@ namespace TelegramBotTask
                 parser.NextStage(lastMessage, chat);
                 return;
             }
+
+            if (chat.IsAddingVerbInProcess)
+            {
+                parser.NextStageVerbs(lastMessage, chat);
+                return;
+            }
+          
 
             if (parser.IsMessageCommand(lastMessage))
             {
@@ -80,6 +88,11 @@ namespace TelegramBotTask
             {
                 chat.IsAddingInProcess = true;
                 parser.StartAddingWord(command, chat);
+            }
+            if (parser.IsAddingVerbCommand(command))
+            {
+                chat.IsAddingVerbInProcess = true;
+                parser.StartAddingVerb(command, chat);
             }
         }
 
