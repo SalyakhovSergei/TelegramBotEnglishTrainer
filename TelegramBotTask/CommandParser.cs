@@ -19,6 +19,7 @@ namespace TelegramBotTask
         {
             Command = new List<IChatCommand>();
             addingController = new AddingController();
+            addingVerbs = new AddingVerbs();
         }
 
         public void AddCommand(IChatCommand chatCommand)
@@ -127,7 +128,7 @@ namespace TelegramBotTask
             var command = Command.Find(x => x.CheckMessage(message)) as AddVerbs;
 
             addingVerbs.AddFirstStateVerbs(chat);
-            command.StarProcessAsync(chat);
+            command.StarProcessAsyncVerb(chat);
 
         }
 
@@ -135,7 +136,7 @@ namespace TelegramBotTask
         {
             var command = Command.Find(x => x is AddVerbs) as AddVerbs;
 
-            command.DoForStageAsync(addingVerbs.GetStage(chat), chat, message);
+            command.DoForStageAsyncVerb(addingVerbs.GetStageVerb(chat), chat, message);
 
             addingVerbs.NextStageVerbs(message, chat);
 
