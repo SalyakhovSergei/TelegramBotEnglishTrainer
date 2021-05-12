@@ -13,8 +13,7 @@ namespace TelegramBotTask.Commands
         private Dictionary<long, TrainingType> training;
         private Dictionary<long, Conversation> trainingChats;
         private Dictionary<long, string> activeWord;
-        private Dictionary<long, TrainingVerb> trainingVerb;
-
+      
         public TrainingCommand(ITelegramBotClient botClient)
         {
             CommandText = "/training";
@@ -114,32 +113,5 @@ namespace TelegramBotTask.Commands
 
             await botClient.SendTextMessageAsync(chatId: chat.GetId(), text: text);
         }
-        
-        public async void NextStepAsyncVerb (Conversation chat, string message)
-        {
-            var type = trainingVerb[chat.GetId()];
-            var word = activeWord[chat.GetId()];
-            var check = chat.CheckVerb(type, word, message);
-            var text = "";
-
-            if (check)
-            {
-                text = "Правильно!";
-            }
-            else
-            {
-                text = "Неправильно!";
-            }
-
-            text = text + " Следующее слово: ";
-            var newword = chat.GetTrainingVerb(type);
-            text = text + newword;
-
-            activeWord[chat.GetId()] = newword;
-
-            await botClient.SendTextMessageAsync(chatId: chat.GetId(), text: text);
-        }
-
-        
     }
 }

@@ -54,12 +54,12 @@ namespace TelegramBotTask
                 parser.NextStageVerbs(lastMessage, chat);
                 return;
             }
-          
-
+            
             if (parser.IsMessageCommand(lastMessage))
             {
                 await ExecCommand(chat, lastMessage);
             }
+            
             else
             {
                 var text = CreateTextMessage();
