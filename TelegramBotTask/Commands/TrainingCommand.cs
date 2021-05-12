@@ -113,5 +113,7 @@ namespace TelegramBotTask.Commands
 
             await botClient.SendTextMessageAsync(chatId: chat.GetId(), text: text);
         }
+
+        
     }
 }

@@ -96,6 +96,48 @@ namespace TelegramBotTask
             }
             return result;
         }
+        
+        public string GetTrainingVerb(TrainingVerb type)
+        {
+            var rand = new Random();
+            var item = rand.Next(0, verbDictionary.Count);
+
+            var randomword = verbDictionary.Values.AsEnumerable().ElementAt(item);
+            var text = string.Empty;
+
+            switch (type)
+            {
+                case TrainingVerb.FirstToSecond:
+                    text = randomword.First;
+                    break;
+
+                case TrainingVerb.SecondToThird:
+                    text = randomword.Second;
+                    break;
+            }
+
+            return text;
+        }
+
+        public bool CheckVerb(TrainingVerb type, string word, string answer)
+        {
+            Verb verbControl;
+            var result = false;
+
+            switch (type)
+            {
+                case TrainingVerb.FirstToSecond:
+                    verbControl = verbDictionary.Values.FirstOrDefault(x => x.Second == word);
+                    result = verbControl.First == answer;
+                    break;
+
+                case TrainingVerb.SecondToThird:
+                    verbControl = verbDictionary[word];
+                    result = verbControl.Second == answer;
+                    break;
+            }
+            return result;
+        }
     }
 }
 
