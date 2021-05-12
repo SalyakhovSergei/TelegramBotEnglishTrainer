@@ -5,32 +5,32 @@ namespace TelegramBotTask
 {
     public class AddingVerbs
     {
-        private Dictionary<long, IrregVerbsStage> ChatAdding;
+        private Dictionary<long, IrregVerbsStage> ChatAddingVerb;
 
         public AddingVerbs()
         {
-            ChatAdding = new Dictionary<long, IrregVerbsStage>();
+            ChatAddingVerb = new Dictionary<long, IrregVerbsStage>();
         }
 
         public void AddFirstStateVerbs(Conversation chat)
         {
-            ChatAdding.Add(chat.GetId(), IrregVerbsStage.First);
+            ChatAddingVerb.Add(chat.GetId(), IrregVerbsStage.First);
         }
 
         public void NextStageVerbs (string message, Conversation chat)
         {
-            var currentstate = ChatAdding[chat.GetId()];
-            ChatAdding[chat.GetId()] = currentstate + 1;
+            var currentstate = ChatAddingVerb[chat.GetId()];
+            ChatAddingVerb[chat.GetId()] = currentstate + 1;
 
-            if (ChatAdding[chat.GetId()] == IrregVerbsStage.Second)
+            if (ChatAddingVerb[chat.GetId()] == IrregVerbsStage.Third)
             {
                 chat.IsAddingVerbInProcess = false;
-                ChatAdding.Remove(chat.GetId());
+                ChatAddingVerb.Remove(chat.GetId());
             }
         }
-        public IrregVerbsStage GetStage(Conversation chat)
+        public IrregVerbsStage GetStageVerb(Conversation chat)
         {
-            return ChatAdding[chat.GetId()];
+            return ChatAddingVerb[chat.GetId()];
         }
     }
 }
