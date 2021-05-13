@@ -20,7 +20,7 @@ namespace TelegramBotTask.Commands
         public async void StarProcessAsyncVerb(Conversation chat)
         {
             Verbs.Add(chat.GetId(), new Verb());
-            var text = "Введите первое значение глагола";
+            var text = "Введите форму глагола в настоящем времени";
             await SendCommandText(text, chat.GetId());
         }
 
