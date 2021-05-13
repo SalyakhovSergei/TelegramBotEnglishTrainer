@@ -22,7 +22,7 @@ namespace TelegramBotTask
             var currentstate = ChatAddingVerb[chat.GetId()];
             ChatAddingVerb[chat.GetId()] = currentstate + 1;
 
-            if (ChatAddingVerb[chat.GetId()] == IrregVerbsStage.Third)
+            if (ChatAddingVerb[chat.GetId()] == IrregVerbsStage.Finish)
             {
                 chat.IsAddingVerbInProcess = false;
                 ChatAddingVerb.Remove(chat.GetId());
